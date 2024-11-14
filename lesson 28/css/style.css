@@ -1,0 +1,44 @@
+.text1 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 30px;
+    font-style: italic;
+}
+
+.text2 {
+    font-family: "Open Sans", serif;
+    font-weight: 500;
+    text-decoration: line-through;
+    font-size: 14px;
+    text-indent: 40px;
+}
+
+.text3 {
+    font-family: "Open Sans", serif;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 24px;
+}
+
+.text4 {
+    font-family: "Open Sans", serif;
+    font-weight: 500;
+    color: #8a2be2;
+    word-spacing: 30px;
+    font-size: 24px;
+    text-decoration-style:wavy;
+    text-decoration-color:#922092;
+    text-decoration-line: overline;
+    text-shadow: 5px 7px 10px #e01414;
+}
+
+.text5 {
+    font-family: "Open Sans", Sans-serif;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    text-decoration: underline double #080808;
+    letter-spacing: 15px;
+}

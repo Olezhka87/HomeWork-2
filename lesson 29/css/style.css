@@ -1,0 +1,21 @@
+.block {
+    max-width: 1600px;
+    min-width: 200px;
+    max-height: 600px;
+    min-height: 100px;
+    background-color: aqua;
+}
+
+.inline {
+    max-width: 1600px;
+    min-width: 200px;
+    max-height: 600px;
+    min-height: 100px;
+    background-color: aqua; // только здесь сработало
+}
+
+img {
+    width: 500px;
+    height: auto;
+   
+}
