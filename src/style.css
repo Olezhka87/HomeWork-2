@@ -98,7 +98,7 @@ body.overflow {
     font-size: 13px;
     font-weight: 500;
     line-height: 130%; /* 16.9px */
-    text-shadow: 4px 4px 4px #00FF00;
+    text-shadow: 2px 2px 2px #808080;
 }
 
 .sidebar__item {
