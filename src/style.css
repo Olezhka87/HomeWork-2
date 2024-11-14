@@ -96,7 +96,7 @@ body.overflow {
 .sidebar__text {
     color: #000000;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 130%; /* 16.9px */
     text-shadow: 2px 2px 2px #808080;
 }
