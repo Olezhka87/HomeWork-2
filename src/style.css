@@ -94,11 +94,11 @@ body.overflow {
 }
 
 .sidebar__text {
-    color: #AFB1A7;
+    color: #000000;
     font-size: 13px;
     font-weight: 400;
     line-height: 130%; /* 16.9px */
-    text-shadow: 5px 3px 2px #00FF00;
+    text-shadow: 4px 4px 4px #00FF00;
 }
 
 .sidebar__item {
