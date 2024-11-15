@@ -140,6 +140,8 @@ body.overflow {
     margin-bottom: 40px;
     background-color: #ffffff;
     border-radius: 15vw;
+    max-widht: 300px;
+    max-heigt: auto;
 }
 
 .content__list {
