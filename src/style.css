@@ -69,7 +69,7 @@ body.overflow {
     -ms-flex-align: center;
     align-items: center;
     padding: 150px 60px 80px 60px;
-    background-image: url(../src/bg.jpg) cover;
+    background: url(../src/bg.jpg);
 }
 
 
