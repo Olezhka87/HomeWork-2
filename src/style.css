@@ -52,7 +52,7 @@ body.overflow {
     -ms-flex-positive: 1;
     flex-grow: 1;
     background: url(../src/bg.jpg);
-    opacity: 0.4;
+    opacity: 0.9;
 }
 
 .container {
