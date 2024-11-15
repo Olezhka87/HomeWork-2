@@ -138,6 +138,8 @@ body.overflow {
     font-size: 48px;
     font-weight: 700;
     margin-bottom: 40px;
+    background-color: #ffffff;
+    border-radius: 15vw;
 }
 
 .content__list {
