@@ -1,0 +1,28 @@
+.block {
+    max-width: 1600px;
+    min-width: 200px;
+    max-height: 600px;
+    min-height: 100px;
+    background-color: aqua;
+    border: 22px dashed #2f81a7;
+    border-bottom-left-radius: 15%;
+    border-top-right-radius: 15%;
+
+}
+
+.inline {
+    max-width: 1600px;
+    min-width: 200px;
+    max-height: 600px;
+    min-height: 100px;
+    background-color: aqua; // только здесь сработало
+
+}
+
+img {
+    width: 500px;
+    height: auto;
+    border-radius: 20% 15% 7% 2%;
+    border-bottom: 15px solid #2fa735;
+
+}

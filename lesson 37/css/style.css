@@ -1,0 +1,20 @@
+body {
+    font-size: 40px;
+    background: #3f423e;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.item {
+    margin: 4vw;
+    height: 50vh;
+    background: #ffffff;
+    border-radius: 2vw;
+    box-shadow: inset 7px 7px 75px #000;
+    overflow: auto;
+    /* background: url(../maks.png) 40% 70% / contain no-repeat, linear-gradient(#000, #3f423e); */
+    background: url(../maks.png) 50% 50%, no-repeat;
+    /* background-position: 50% 50%, 0 0; */
+}
