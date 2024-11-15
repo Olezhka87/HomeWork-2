@@ -142,6 +142,7 @@ body.overflow {
     border-radius: 15vw;
     max-widht: 300px;
     max-heigt: auto;
+    text-align: center;
 }
 
 .content__list {
