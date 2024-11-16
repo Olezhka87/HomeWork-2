@@ -51,7 +51,7 @@ body.overflow {
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-    background: url(../src/bg.jpg) 100% 100% no-repeat;
+    background: #000000;
     opacity: 0.9;
 }
 
