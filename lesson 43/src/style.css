@@ -45,7 +45,7 @@ body {
 }
 
 .main__text2, .main__text1 {
-    line-height: 20px;
+    line-height: 150%;
 }
 
 .header__button {
