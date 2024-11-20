@@ -1,0 +1,14 @@
+form {
+    border: 2px solid #19aa31;
+    max-width: 450px;
+}
+
+legend {
+    border: 2px solid #e4e01e;
+}
+
+fieldset {
+    border: 2px solid #3db4ae;
+    margin-bottom: 2px;
+    border-radius: 2vw;
+}

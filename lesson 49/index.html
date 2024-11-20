@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>49. Возможности тэга input</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <form>
+        <fieldset>
+            <legend>Форма обратной связи</legend>
+
+            <input type="text" placeholder="Ваше имя" required>
+            <input type="email" placeholder="Email" required>
+            <br>
+            <br>
+            <input placeholder="Телефон" type="tel">
+            <input placeholder="Пароль" type="password">
+            <br>
+            <br>
+            <label>
+                Ваш пол
+                <select>
+                    <option value="men">Мужской</option>
+                    <option value="woman">Женский</option>
+                </select>
+                <label>
+                    <input type="radio" name="radio1">
+                    Супермен
+                </label>
+                <label>
+                    <input type="radio" name="radio1">
+                    Качок
+                </label>
+                <label>
+                    <input type="radio" name="radio1">
+                    Чувак
+                </label>
+            </label>
+            <br>
+            <br>
+            <textarea placeholder="Введите Ваше сообщение" id="" cols="50" rows="7"></textarea>
+            <br>
+            <br>
+            <label>
+                Выберите дату
+                <input type="date">
+            </label>
+            <br>
+            <br>
+            <button type="submit">Отправить</button>
+            <button type="reset">Очистить</button>
+        </fieldset>
+    </form>
+</body>
+
+</html>
