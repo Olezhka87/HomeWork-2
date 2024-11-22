@@ -5,6 +5,7 @@ body {
 
 
 .box__grey {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,6 +16,7 @@ body {
   background-color: #808080;
   border-radius: 10%;
 }
+
 
 
 .box__grey::before {
@@ -33,17 +35,26 @@ body {
   padding-right: 520px;
   height: 30px;
   background-color: #faf9f9;
-  transition-duration: 5s;
-
+  transition-duration: 4.9s;
 }
 
 .text {
-  font-size: 24px;
-  display: none;
+  color: blue;
+  visibility: hidden;
 }
 
-.box__grey :hover::after, .text:hover{
+.box__grey:hover::after {
   content: "";
+  display: block;
+  background-color: aquamarine;
   color: red;
   transition: opacity .2s, visibility .2s;
+
+}
+
+.box__grey:hover p {
+  visibility: visible;
+  font-size: 30px;
+  transition-delay: 5s;
+
 }
