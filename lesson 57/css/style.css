@@ -1,0 +1,41 @@
+body {
+  background-color: black;
+  border: 5px solid grey;
+}
+
+
+h1 {
+  color: #ffffff;
+  font-size: 50px;
+  transform: translate(40%, 100%);
+  
+}
+
+h1::before {
+  content: '';
+  display: block;
+  position: absolute;
+  transform: translate(-140%, -15%);
+  /* top: -35%;
+  left: -9%; */  
+  width: 80px;
+  height: 80px;
+  background-color: #d40b0b;
+  border-radius: 100%;
+  border: 3px solid;
+}
+
+
+h1::after {
+  content: '';
+  display: block;
+  position: absolute;
+  transform: translate(300%, -80%);
+  /* top: -35%;
+  right: 77%; */
+  width: 80px;
+  height: 80px;
+  background-color: #4c49c9;
+  border-radius: 100%;
+  border: 3px solid;
+}
