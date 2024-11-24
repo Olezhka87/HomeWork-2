@@ -1,0 +1,62 @@
+body {
+  background-color: black;
+}
+
+.animation {
+  margin-top: 30px;
+  margin-left: 30px;
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
+  background-image: url('../jNMCTby8WI7k_JBNXQ73YNR6CEEoZMVH0FSVZKxzl2pedYuCZVSMhGbayFuCXUbRWnZEBSUuuGbs0sry9coXHoPV.jpg');
+  background-size: cover;
+  /* animation */
+  animation-duration: 7s;
+  animation-name: cirle;
+  animation-iteration-count: 3;
+}
+
+@keyframes cirle {
+  0% {
+    left: 0px;
+  }
+
+20% {
+  width: 200px;
+  height: 200px;
+}
+
+
+  50% {
+    transform: translateX(300px) translateY(300px);
+  }
+
+  98% {
+    width: 148px;
+    height: 148px;
+  }
+  100% {
+    margin-left: calc(100% - 241px);
+    
+  }
+}
+
+.text {
+  margin-top: 300px;
+  margin-left: 300px;
+  max-width: 900px;
+  height: auto;
+  overflow: hidden;
+  border-right: .15em solid orange;
+  white-space: nowrap;
+  font-size: 2rem;
+  width: 0;
+  animation: typing 14s forwards;
+  animation-iteration-count: 3;
+  color: green;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}

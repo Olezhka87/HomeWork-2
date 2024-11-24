@@ -1,0 +1,52 @@
+body {
+  background-color: black;
+}
+
+
+.content {
+  display: grid;
+  grid-template-columns: 10% 1fr 1fr 1fr;
+  border: 2px solid #fff;
+  font-size: 36px;
+  line-height: 60px;
+  text-align: center;
+  color: #fff;
+  padding: 10px;
+  
+}
+
+.numbers {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  border: 2px solid #808080;
+}
+
+.names {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.last-names {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.adress {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.description {
+  color: #fff;
+  display: grid;
+  width: 98.8vw;
+  height: auto;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  background-color: rgb(73, 73, 80);
+  border: 2px solid #daa520;
+}
+
+.name, .adr, .number, .last-name   {
+  border: 2px solid #808080;
+}
