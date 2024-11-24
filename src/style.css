@@ -101,8 +101,8 @@ body.overflow {
     line-height: 130%; /* 16.9px */
     text-shadow: 2px 2px 2px #808080;
     mask-image: linear-gradient(-75deg, rgba(0, 0, 0, .6) 30%, #000 50%, rgba(0, 0, 0, .6) 70%);
-  mask-size: 200%;
-  animation: wave 2s infinite;
+  mask-size: 250%;
+  animation: wave 6s infinite;
 }
 
 @keyframes wave {
