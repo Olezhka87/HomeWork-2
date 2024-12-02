@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Sanserif', sans-serif;
+    background-color: #000;
+  }
+  
+  .text-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  .text-container h1{
+    margin: 0;
+    font-size: 150px;
+    color: rgba(225,225,225, .01);
+    background-image: url("https://i.pinimg.com/originals/de/a5/a2/dea5a2328861366ecf963831474eab6a.jpg");
+    background-repeat: repeat;
+    background-clip:text;
+    animation: animate 15s ease-in-out infinite;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    box-shadow: 10px 5px 50px red;
+    border-radius: 2vw;
+    padding: 15px 30px;
+  }
+
+
+
+
+  
+    @keyframes animate {
+      0%, 100% {
+        background-position: top;
+      }
+      25%{
+        background-position: bottom;
+       }
+      50% {
+        background-position: bottom;
+      }
+      75% {
+        background-position: top;
+      }   
+  }
