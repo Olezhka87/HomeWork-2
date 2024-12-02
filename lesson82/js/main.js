@@ -18,18 +18,30 @@ console.log('Hello ' + result);
 //  Функция должна перебирать полученный массив и если число больше 10 - выводить это число в консоль.
 
 
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 10, 14, 17, 33, 46, 55, 59, 62, 66, 69, 71, 73, 77, 78, 80, 84, 86, 91, 92, 95, 97, 99]
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 10, 14, 17, 33, 46, 55, 59, 62, 66, 69, 71, 73, 77, 78, 80, 84, 86, 91, 92, 95, 97, 99]
 
 function funcNumbers(arr) {
-  let result = [];
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] > 10) {
-      result.push(arr[i]); // добавляем число в результат, если оно больше 10
+      console.log(arr[i]);
     }
   }
-  return result;
 }
-console.log(funcNumbers(arr));
+funcNumbers(numbers);
+
+// // Функция, которая принимает массив чисел и выводит числа больше 10
+// function filterAndLogNumbers(arr) {
+//   // Используем метод filter для получения чисел больше 10
+//   const filteredNumbers = arr.filter(number => number > 10);
+
+//   // Перебираем отфильтрованный массив и выводим числа в консоль
+//   filteredNumbers.forEach(number => {
+//       console.log(number);
+//   });
+// }
+
+// // Вызываем функцию с массивом numbers
+// 
 
 
 
@@ -51,10 +63,10 @@ function calcNumber(firstNum, secondNum, operator) {
       return firstNum * secondNum; // Умножение
     case 'div':
       return firstNum / secondNum; // Деление
-      default:
-    return 'Неизвестный оператор'; // Обработка неопознанного оператора
+    default:
+      return 'Неизвестный оператор'; // Обработка неопознанного оператора
   }
-  
+
 }
 
 let result2 = calcNumber(2, 3, 'plus');
