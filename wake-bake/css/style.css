@@ -1,0 +1,49 @@
+:root {
+    --bg-color: #FFF9F4;
+    --general-text: #312C27;
+    --accent-bg: #FFA55C;
+    --accent-text: #1F1711;
+    --accent-bg: #FFE0CB;
+}
+
+
+body {
+    font-family: "Montserrat", "Arial", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--p--text);
+    line-height: 1.5;
+}
+
+.wrapper {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+
+.header {
+    text-align: center;
+    border-bottom: 3px solid #312C27;
+}
+
+.main {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer {
+    text-align: center;
+    border-top: 3px solid #312C27;
+}
+
+.container {
+    max-width: 1310px;
+    margin: 0 auto;
+    padding: 0 15px;
+    height: 100%;
+    border: 3px solid #312C27;
+}
