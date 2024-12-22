@@ -667,6 +667,7 @@
     border-radius: 100px;
     box-shadow: #FFF9F4;
     box-shadow: 0px 4px 20px rgba(206, 195, 185, 0.3);
+    transition: all .4s;
 }
 
 .tab__control-link:hover {
