@@ -197,7 +197,7 @@ let inputs = document.querySelectorAll('input[type="tel"]');
 let im = new Inputmask('+7(999)999-99-99');
 im.mask(inputs);
 
-inputs.forEach(input => {
-  input.style.color = ('rgb(255, 165, 92)'); // Меняет цвет текста
+// inputs.forEach(input => {
+//   input.style.color = ('rgb(255, 165, 92)'); // Меняет цвет текста
   
-});
+// });
