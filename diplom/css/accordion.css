@@ -1,0 +1,134 @@
+.accordionjs {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 59px;
+}
+
+.accordionjs .acc_section {
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+
+}
+
+.accordionjs .acc_section .acc_head {
+  position: relative;
+  background: linear-gradient(286.41deg, #073447 3.63%, #08262B 90.98%);
+  padding: 10px;
+  display: block;
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  padding: 15px 15px 18px 43px;
+}
+
+
+
+.accordionjs .acc_section .acc_head::after {
+  position: absolute;
+  left: 1.5%;
+  bottom: 44%;
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(180deg, #00E0FF 0%, #4A8BEC 100%);
+  border-radius: 100%;
+  box-shadow: 0px 4px 8px 0px #00E0FF8F;
+}
+
+.accordionjs .acc_section .acc_head h3 {
+  margin: 5px 0;
+}
+
+.accordionjs .acc_section .acc_content {
+  margin-top: 37px;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.accordionjs .acc_section:first-of-type,
+.accordionjs .acc_section:first-of-type .acc_head {
+  border-radius: 6px;
+  max-width: 1200px;
+  width: 100%;
+
+}
+
+.accordionjs .acc_section:last-of-type,
+.accordionjs .acc_section:last-of-type .acc_content {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.accordionjs .acc_section.acc_active>.acc_content {
+  display: block;
+}
+
+.accordionjs .acc_section.acc_active>.acc_head {
+  background: linear-gradient(286.41deg, #073447 3.63%, #08262B 90.98%);
+  padding: 15px 15px 18px 43px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.accordionjs .acc_section.acc_active>.acc_head svg {
+  transform: rotate(180deg);
+}
+
+.accordionjs .acc_section.acc_active>.acc_head::after {
+  position: absolute;
+  left: 1.5%;
+  bottom: 44%;
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(180deg, #00E0FF 0%, #4A8BEC 100%);
+  border-radius: 100%;
+  box-shadow: 0px 4px 8px 0px #00E0FF8F;
+}
+
+.accordionjs .acc_section .acc_head svg:hover {}
+
+.accordion__list-content {
+  margin-left: 34px;
+
+}
+
+.accordion__list-content li {
+  position: relative;
+}
+
+.accordion__list-content li::before {
+  content: counter(list-item);
+  position: absolute;
+  left: -43px;
+  top: -3%;
+  background-color: #4ABCEC;
+  color: #08262B;
+  font-family: 'Avenir Next Cyr Bold';
+  font-size: 14px;
+  line-height: 21px;
+  width: 27px;
+  height: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.accordion__item-title {
+  font-family: Avenir Next Cyr Heavy;
+  font-size: 16px;
+  font-weight: 750;
+  line-height: 21px;
+  color: #4ABCEC;
+  margin-bottom: 16px;
+}
+
+
