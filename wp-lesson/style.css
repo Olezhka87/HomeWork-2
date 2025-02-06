@@ -1,0 +1,26 @@
+.text {
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    color: #4CAF50;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 30px 0;
+}
+
+.block {
+    text-align: center;
+}
+
+.block-number {
+    font-size: 38px;
+    font-weight: 700;
+    display: flex;
+    letter-spacing: 30px;
+    align-items: center;
+    justify-content: center;
+}
