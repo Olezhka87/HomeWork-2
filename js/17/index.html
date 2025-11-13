@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JS Lesson 17</title>
+<style>
+    body {
+        margin: 0;
+        padding: 20px;
+        background-color: #000001;
+        font-family: Arial, sans-serif;
+        color: #f0f0f0;
+    }
+
+    h2, h3 {
+        margin: 10px 0;
+    }
+
+    .container {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+				text-align: center;
+    }
+
+    textarea {
+        width: 810px;
+        height: 200px;
+        background-color: #1e1e1e;
+        color: #f0f0f0;
+        border: none;
+        padding: 15px;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        border-radius: 10px;
+        white-space: pre;
+        resize: none;
+    }
+	
+		#code3 {
+			height: 700px !important;
+		}
+
+    #output, #output1, #output2, #output3, #output4 {
+        width: 500px;
+        height: 300px;
+        background-color: #1e1e1e;
+        padding: 15px;
+        border-radius: 10px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+    }
+
+    button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        background-color: #4CAF50;
+        color: white;
+    }
+</style>
+</head>
+<body>
+
+<h2>Задание 1 — Проверка четного числа</h2>
+<div class="container">
+    <div>
+        <h3>Код</h3>
+        <textarea id="code">
+// Проверка четного числа
+let a = 20;
+
+if (a % 2 === 0) {
+    console.log('Число четное');
+} else {
+    console.log('Число нечетное');
+}
+        </textarea>
+        <br>
+        <button onclick="runCode('code','output')">Выполнить</button>
+    </div>
+
+    <div>
+        <h3>Вывод</h3>
+        <div id="output"></div>
+    </div>
+</div>
+
+<h2>Задание 2 — Тернарный оператор</h2>
+<div class="container">
+    <div>
+        <h3>Код</h3>
+        <textarea id="code1">
+let age = 18;
+let discount = age < 18 ? 10 : (age > 64 ? 30 : 20);
+console.log(discount + ' % скидка');
+        </textarea>
+        <br>
+        <button onclick="runCode('code1','output1')">Выполнить</button>
+    </div>
+
+    <div>
+        <h3>Вывод</h3>
+        <div id="output1"></div>
+    </div>
+</div>
+
+<h2>Задание 3 — Проверка логина и пароля</h2>
+<div class="container">
+    <div>
+        <h3>Код</h3>
+        <textarea id="code2">
+// Ввод логина и пароля
+let username = prompt("Введите логин");
+let password = prompt("Введите пароль");
+
+if ((username === "admin" || username === "user") && password === "123456") {
+    console.log("Доступ разрешен");
+} else {
+    console.log("Доступ запрещен");
+}
+        </textarea>
+        <br>
+        <button onclick="runCode('code2','output2')">Выполнить</button>
+    </div>
+
+    <div>
+        <h3>Вывод</h3>
+        <div id="output2"></div>
+    </div>
+</div>
+
+<h2>Задание 4 — Расчет стоимости доставки</h2>
+<div class="container">
+    <div>
+        <h3>Код</h3>
+        <textarea id="code3" style="height: 400px;">
+function calcDelivery() {
+	let kg = Number(prompt("Введите вес посылки (в кг):"));
+	let options = prompt("Введите тип доставки: Стандарт / Экспресс / Премиум");
+	let price;
+	let coef;
+	let totalPrice;
+
+	if (kg <= 0) {
+		alert("Некорректный вес посылки");
+		return;
+	} else if (options !== "Стандарт" && options !== "Экспресс" && options !== "Премиум") {
+		alert("Неверный тип доставки");
+		return;
+	} 
+	if (kg < 1) {
+		price = 5;
+	} else if (kg <= 5) {
+		price = 10;
+	} else {
+		price = 15;
+	}
+
+	switch(options) {
+		case "Стандарт":
+			coef = 1;
+			break;
+		case "Экспресс":
+			coef = 1.5;
+			break;
+		case "Премиум":
+			coef = 2;
+			break;
+	}
+
+	totalPrice = price * coef;
+	alert("Итоговая стоимость: " + totalPrice + " $");
+}
+
+calcDelivery();
+        </textarea>
+        <br>
+        <button onclick="runCode('code3','output3')">Выполнить</button>
+    </div>
+
+    
+</div>
+
+<script>
+function runCode(codeId, outputId) {
+    const code = document.getElementById(codeId).value;
+    const outputDiv = document.getElementById(outputId);
+    outputDiv.textContent = '';
+
+    const originalLog = console.log;
+    console.log = function(...args) {
+        args.forEach(arg => outputDiv.textContent += arg + '\n');
+        originalLog.apply(console, args);
+    }
+
+    try {
+        new Function(code)();
+    } catch (e) {
+        outputDiv.textContent += 'Ошибка: ' + e.message;
+    }
+
+    console.log = originalLog;
+}
+</script>
+
+</body>
+</html>
