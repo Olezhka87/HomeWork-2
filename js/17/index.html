@@ -22,12 +22,11 @@
         gap: 20px;
         flex-wrap: wrap;
         margin-bottom: 40px;
-				text-align: center;
     }
 
     textarea {
-        width: 810px;
-        height: 200px;
+        width: 650px;
+        height: 300px;
         background-color: #1e1e1e;
         color: #f0f0f0;
         border: none;
@@ -38,12 +37,8 @@
         white-space: pre;
         resize: none;
     }
-	
-		#code3 {
-			height: 700px !important;
-		}
 
-    #output, #output1, #output2, #output3, #output4 {
+    #output, #output1, #output2, #output2_1, #output3, #output4 {
         width: 500px;
         height: 300px;
         background-color: #1e1e1e;
@@ -84,7 +79,7 @@ if (a % 2 === 0) {
 }
         </textarea>
         <br>
-        <button onclick="runCode('code','output')">Выполнить</button>
+        <button onclick="runCode('code', 'output')">Выполнить</button>
     </div>
 
     <div>
@@ -103,7 +98,7 @@ let discount = age < 18 ? 10 : (age > 64 ? 30 : 20);
 console.log(discount + ' % скидка');
         </textarea>
         <br>
-        <button onclick="runCode('code1','output1')">Выполнить</button>
+        <button onclick="runCode('code1', 'output1')">Выполнить</button>
     </div>
 
     <div>
@@ -112,11 +107,38 @@ console.log(discount + ' % скидка');
     </div>
 </div>
 
-<h2>Задание 3 — Проверка логина и пароля</h2>
+<h2>Задание 2.1 — Switch-case</h2>
 <div class="container">
     <div>
         <h3>Код</h3>
         <textarea id="code2">
+let age = 18;
+switch(true) {
+    case age < 18:
+        console.log("Меньше 18 лет - скидка 10%");
+        break;
+    case age < 65:
+        console.log("От 18 до 65 лет - скидка 20%");
+        break;
+    default:
+        console.log("Больше 65 лет - скидка 30%");
+}
+        </textarea>
+        <br>
+        <button onclick="runCode('code2', 'output2_1')">Выполнить</button>
+    </div>
+
+    <div>
+        <h3>Вывод</h3>
+        <div id="output2_1"></div>
+    </div>
+</div>
+
+<h2>Задание 3 — Проверка логина и пароля</h2>
+<div class="container">
+    <div>
+        <h3>Код</h3>
+        <textarea id="code3">
 // Ввод логина и пароля
 let username = prompt("Введите логин");
 let password = prompt("Введите пароль");
@@ -128,12 +150,12 @@ if ((username === "admin" || username === "user") && password === "123456") {
 }
         </textarea>
         <br>
-        <button onclick="runCode('code2','output2')">Выполнить</button>
+        <button onclick="runCode('code3', 'output3')">Выполнить</button>
     </div>
 
     <div>
         <h3>Вывод</h3>
-        <div id="output2"></div>
+        <div id="output3"></div>
     </div>
 </div>
 
@@ -141,52 +163,56 @@ if ((username === "admin" || username === "user") && password === "123456") {
 <div class="container">
     <div>
         <h3>Код</h3>
-        <textarea id="code3" style="height: 400px;">
+        <textarea id="code4">
 function calcDelivery() {
-	let kg = Number(prompt("Введите вес посылки (в кг):"));
-	let options = prompt("Введите тип доставки: Стандарт / Экспресс / Премиум");
-	let price;
-	let coef;
-	let totalPrice;
+    let kg = Number(prompt("Введите вес посылки (в кг):"));
+    let options = prompt("Введите тип доставки: Стандарт / Экспресс / Премиум");
+    let price;
+    let coef;
+    let totalPrice;
 
-	if (kg <= 0) {
-		alert("Некорректный вес посылки");
-		return;
-	} else if (options !== "Стандарт" && options !== "Экспресс" && options !== "Премиум") {
-		alert("Неверный тип доставки");
-		return;
-	} 
-	if (kg < 1) {
-		price = 5;
-	} else if (kg <= 5) {
-		price = 10;
-	} else {
-		price = 15;
-	}
+    if (kg <= 0) {
+        alert("Некорректный вес посылки");
+        return;
+    } else if (options !== "Стандарт" && options !== "Экспресс" && options !== "Премиум") {
+        alert("Неверный тип доставки");
+        return;
+    }
 
-	switch(options) {
-		case "Стандарт":
-			coef = 1;
-			break;
-		case "Экспресс":
-			coef = 1.5;
-			break;
-		case "Премиум":
-			coef = 2;
-			break;
-	}
+    if (kg < 1) {
+        price = 5;
+    } else if (kg <= 5) {
+        price = 10;
+    } else {
+        price = 15;
+    }
 
-	totalPrice = price * coef;
-	alert("Итоговая стоимость: " + totalPrice + " $");
+    switch(options) {
+        case "Стандарт":
+            coef = 1;
+            break;
+        case "Экспресс":
+            coef = 1.5;
+            break;
+        case "Премиум":
+            coef = 2;
+            break;
+    }
+
+    totalPrice = price * coef;
+    alert("Итоговая стоимость: " + totalPrice + " руб.");
 }
 
 calcDelivery();
         </textarea>
         <br>
-        <button onclick="runCode('code3','output3')">Выполнить</button>
+        <button onclick="runCode('code4', 'output4')">Выполнить</button>
     </div>
 
-    
+    <div>
+        <h3>Вывод</h3>
+        <div id="output4"></div>
+    </div>
 </div>
 
 <script>
