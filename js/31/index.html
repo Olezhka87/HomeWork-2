@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JS Lesson 25</title>
+<style>
+    body {
+        margin: 0;
+        padding: 20px;
+        background-color: #000001;
+        font-family: Arial, sans-serif;
+        color: #f0f0f0;
+    }
+
+    h2, h3 {
+        margin: 10px 0;
+				text-align: center;
+    }
+
+    .container {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+				justify-content: center;
+    }
+
+    textarea {
+        width: 800px;
+        height: 300px;
+        background-color: #1e1e1e;
+        color: #f0f0f0;
+        border: none;
+        padding: 15px;
+        font-family: 'Courier New', monospace;
+        font-size: 18px;
+        border-radius: 10px;
+        white-space: pre;
+        resize: none;
+    }
+
+    #output, #output1, #output2, #output2_1, #output3, #output4 {
+        width: 500px;
+        height: 300px;
+        background-color: #1e1e1e;
+        padding: 15px;
+        border-radius: 10px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+    }
+
+    button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        background-color: #4CAF50;
+        color: white;
+				justify-self: center;
+				display: flex;
+    }
+</style>
+</head>
+<body>
+
+<h2>Задание 1 — Напишите функцию calculateFinalPrice<br>
+	которая принимает базовую цену товара
+	процент скидки и налоговую ставку<br>
+	Функция должна вычислять скидку 
+	затем прибавлять налог и возвращать итоговую цену.</h2>
+<div class="container">
+    <div>
+        <h3>Код</h3>
+        <textarea id="code">
+function calculateFinalPrice(priceBase, priceDiscount, priceTaxe) {
+	let priceBaseDiscount = (priceBase * priceDiscount / 100);
+	priceBase = priceBase - priceBaseDiscount;
+	priceBase = priceBase +  (priceBase *priceTaxe);
+		return priceBase;
+	}
+		console.log(calculateFinalPrice(100, 10, 0.2));
+		console.log(calculateFinalPrice(100, 10, 0));
+        </textarea>
+        <br>
+        <button onclick="runCode('code', 'output')">Выполнить</button>
+    </div>
+
+    <div>
+        <h3>Вывод</h3>
+        <div id="output"></div>
+    </div>
+</div>
+
+<hr>
+
+<h2>Задание 2 — Напишите функцию checkAccess, которая принимает имя пользователя и пароль. Если имя пользователя равно "admin" и пароль равен "123456",<br> функция должна возвращать строку "Доступ разрешен", иначе — "Доступ запрещен".</h2>
+<div class="container">
+    <div>
+        <h3>Код</h3>
+        <textarea id="code1">
+function checkAccess(userName, userPassword) {
+	if (userName === "admin" && userPassword === "123456") {
+	return("Доступ разрешен")
+		} else
+			return("Доступ запрещен")
+		}
+					
+console.log(checkAccess("admin", "123456"));
+console.log(checkAccess("admin", "654321"));
+        </textarea>
+        <br>
+        <button onclick="runCode('code1', 'output1')">Выполнить</button>
+    </div>
+
+    <div>
+        <h3>Вывод</h3>
+        <div id="output1"></div>
+    </div>
+</div>
+
+<hr>
+
+<h2>Задание 3 - Напишите функцию getTimeOfDay, которая принимает текущее время (число от 0 до 23) и возвращает строку:<br>
+	"Ночь" (с 0 до 5 часов),<br>
+	"Утро" (с 6 до 11 часов),<br>
+	"День" (с 12 до 17 часов),<br>
+	"Вечер" (с 18 до 23 часов).<br>
+	Если введённое значение не попадает в этот диапазон, возвращайте `"Некорректное время"`.</h2>
+<div class="container">
+    <div>
+        <h3>Код</h3>
+        <textarea id="code2">
+function getTimeOfDay(realTime) {
+	if (realTime < 0 || realTime > 23) {
+	return "Некорректное время";
+	 } else if(realTime >= 0 && realTime <= 5) {
+		return "Ночь"
+		} else if (realTime >= 6 && realTime <= 11) {
+			return "Утро"
+		} else if (realTime >= 12 && realTime <=17) {
+			return "День"
+		} else if (realTime >= 18 && realTime <=23) {
+			return "Вечер"
+}
+	}
+					
+console.log(getTimeOfDay(24));
+console.log(getTimeOfDay(10));
+console.log(getTimeOfDay(13));
+console.log(getTimeOfDay(19));
+        </textarea>
+        <br>
+        <button onclick="runCode('code2', 'output2_1')">Выполнить</button>
+    </div>
+
+    <div>
+        <h3>Вывод</h3>
+        <div id="output2_1"></div>
+    </div>
+</div>
+<hr>
+
+<h2>Задание 4 - Напишите функцию findFirstEven, которая принимает два числа start и end и находит первое чётное число в указанном диапазоне.
+	<br> Если чётного числа в этом диапазоне нет, функция должна вернуть "Чётных чисел нет"</h2>
+<div class="container">
+    <div>
+        <h3>Код</h3>
+        <textarea id="code4">
+function findFirstEven(start, end) {
+	for (let i = start; i <= end; i++) {
+		if (i % 2 === 0) {
+			return i;
+		} 
+	}
+	return "Чётных чисел нет";
+}
+
+console.log(findFirstEven(1, 10));
+console.log(findFirstEven(9, 9));
+console.log(findFirstEven(1, 3));
+console.log(findFirstEven(3, 5));
+        </textarea>
+        <br>
+        <button onclick="runCode('code4', 'output4')">Выполнить</button>
+    </div>
+
+    <div>
+        <h3>Вывод</h3>
+        <div id="output4"></div>
+    </div>
+</div>
+
+
+
+<script>
+function runCode(codeId, outputId) {
+    const code = document.getElementById(codeId).value;
+    const outputDiv = document.getElementById(outputId);
+    outputDiv.textContent = '';
+
+    const originalLog = console.log;
+    console.log = function(...args) {
+        args.forEach(arg => outputDiv.textContent += arg + '\n');
+        originalLog.apply(console, args);
+    }
+
+    try {
+        new Function(code)();
+    } catch (e) {
+        outputDiv.textContent += 'Ошибка: ' + e.message;
+    }
+
+    console.log = originalLog;
+}
+</script>
+
+</body>
+</html>
