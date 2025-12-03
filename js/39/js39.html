@@ -481,7 +481,7 @@ const task = {
 function callAllMethods (object) { 
 	for (let key in object) {
 		if (typeof object[key] === "function") {
-			object[key]()
+		object[key]()   <!-- Ищем метод из первого задания -->
 		} else {
 		console.log(`Это свойство: ${key}`)}
 	}
