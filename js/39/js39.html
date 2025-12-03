@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Домашнее задание по JavaScript</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #121212;
+            color: rgba(255, 255, 255, 0.87);
+            line-height: 1.7;
+            padding: 0 100px;
+            font-size: 18px;
+            background-image: linear-gradient(to bottom right, rgba(30, 30, 40, 0.3), rgba(20, 20, 30, 0.3));
+            min-height: 100vh;
+        }
+        
+        .task-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 70px 0;
+            border-bottom: 1px solid rgba(100, 100, 120, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .task-container:last-child {
+            border-bottom: none;
+        }
+        
+        .task-header {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: rgba(40, 40, 50, 0.4);
+            border-radius: 12px;
+            border-left: 4px solid rgba(120, 120, 220, 0.7);
+        }
+        
+        .task-number {
+            font-size: 22px;
+            color: rgba(180, 180, 220, 0.9);
+            margin-bottom: 10px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        .task-title {
+            font-size: 26px;
+            color: rgba(200, 200, 255, 0.95);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .task-description {
+            color: rgba(200, 200, 220, 0.8);
+            font-size: 18px;
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        
+        .code-editor {
+            background: rgba(30, 30, 40, 0.6);
+            border-radius: 12px;
+            padding: 0;
+            margin-bottom: 35px;
+            border: 1px solid rgba(80, 80, 100, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .editor-header {
+            background: rgba(40, 40, 55, 0.8);
+            padding: 18px 28px;
+            border-bottom: 1px solid rgba(80, 80, 100, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .editor-title {
+            color: rgba(180, 200, 255, 0.9);
+            font-weight: 500;
+            font-size: 18px;
+        }
+        
+        .reset-btn {
+            background: rgba(80, 80, 120, 0.3);
+            color: rgba(220, 220, 255, 0.9);
+            border: 1px solid rgba(100, 100, 140, 0.4);
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .reset-btn:hover {
+            background: rgba(100, 100, 140, 0.5);
+            border-color: rgba(120, 120, 160, 0.6);
+        }
+        
+        textarea.code-input {
+            width: 100%;
+            min-height: 300px;
+            background: rgba(25, 25, 35, 0.7);
+            color: rgba(180, 200, 255, 0.9);
+            border: none;
+            padding: 28px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 17px;
+            line-height: 1.6;
+            resize: vertical;
+            outline: none;
+            white-space: pre;
+            overflow-wrap: normal;
+            overflow-x: auto;
+            caret-color: rgba(180, 200, 255, 0.9);
+        }
+        
+        textarea.code-input:focus {
+            background: rgba(30, 30, 45, 0.8);
+        }
+        
+        .run-btn {
+            background: linear-gradient(135deg, rgba(100, 120, 220, 0.8), rgba(80, 100, 200, 0.8));
+            color: rgba(255, 255, 255, 0.95);
+            border: none;
+            padding: 20px 55px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 35px;
+            align-self: flex-start;
+            box-shadow: 0 4px 15px rgba(80, 100, 200, 0.2);
+            letter-spacing: 0.5px;
+        }
+        
+        .run-btn:hover {
+            background: linear-gradient(135deg, rgba(120, 140, 240, 0.9), rgba(100, 120, 220, 0.9));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(80, 100, 200, 0.3);
+        }
+        
+        .run-btn:active {
+            transform: translateY(0);
+        }
+        
+        .output-container {
+            background: rgba(30, 30, 40, 0.6);
+            border-radius: 12px;
+            padding: 0;
+            border: 1px solid rgba(80, 80, 100, 0.3);
+            min-height: 200px;
+            display: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(5px);
+        }
+        
+        .output-header {
+            background: rgba(40, 50, 60, 0.7);
+            padding: 20px 28px;
+            border-bottom: 1px solid rgba(80, 80, 100, 0.3);
+            color: rgba(160, 220, 180, 0.9);
+            font-weight: 500;
+            font-size: 18px;
+        }
+        
+        .output-content {
+            padding: 28px;
+            color: rgba(220, 240, 180, 0.9);
+            white-space: pre-wrap;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 17px;
+            line-height: 1.7;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .success-message {
+            color: rgba(160, 220, 180, 0.9);
+            font-weight: 500;
+            margin-top: 25px;
+            font-size: 18px;
+            display: none;
+            padding: 15px 25px;
+            background: rgba(40, 60, 50, 0.3);
+            border-radius: 8px;
+            border-left: 4px solid rgba(160, 220, 180, 0.6);
+        }
+        
+        .task-divider {
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(120, 120, 220, 0.3), 
+                transparent);
+            margin: 60px 0;
+        }
+        
+        /* Стили для прокрутки */
+        .output-content::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        .output-content::-webkit-scrollbar-track {
+            background: rgba(40, 40, 50, 0.4);
+            border-radius: 5px;
+        }
+        
+        .output-content::-webkit-scrollbar-thumb {
+            background: rgba(100, 120, 220, 0.5);
+            border-radius: 5px;
+        }
+        
+        .output-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(120, 140, 240, 0.6);
+        }
+        
+        textarea.code-input::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        textarea.code-input::-webkit-scrollbar-track {
+            background: rgba(40, 40, 50, 0.4);
+            border-radius: 5px;
+        }
+        
+        textarea.code-input::-webkit-scrollbar-thumb {
+            background: rgba(120, 120, 180, 0.4);
+            border-radius: 5px;
+        }
+        
+        @media (max-width: 1200px) {
+            body {
+                padding: 0 60px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            body {
+                padding: 0 40px;
+                font-size: 17px;
+            }
+            
+            .task-container {
+                padding: 50px 0;
+            }
+            
+            textarea.code-input {
+                font-size: 16px;
+                padding: 24px;
+            }
+            
+            .run-btn {
+                padding: 18px 45px;
+                font-size: 17px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 0 25px;
+                font-size: 16px;
+            }
+            
+            .task-container {
+                padding: 40px 0;
+            }
+            
+            .task-number {
+                font-size: 20px;
+            }
+            
+            .task-title {
+                font-size: 22px;
+            }
+            
+            .task-description {
+                font-size: 16px;
+            }
+            
+            textarea.code-input {
+                font-size: 15px;
+                padding: 20px;
+                min-height: 250px;
+            }
+            
+            .run-btn {
+                padding: 16px 35px;
+                font-size: 16px;
+                width: 100%;
+            }
+            
+            .editor-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .reset-btn {
+                align-self: flex-start;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 0 15px;
+            }
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .task-container {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        .code-editor {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .code-editor:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <!-- Задача 1 -->
+    <div class="task-container">
+        <div class="task-header">
+            <div class="task-number">Задача 1</div>
+            <h2 class="task-title">Объект person</h2>
+            <p class="task-description">Создайте объект person с несколькими свойствами, содержащими информацию о вас. Затем выведите значения этих свойств в консоль.</p>
+        </div>
+        
+        <div class="code-editor">
+            <div class="editor-header">
+                <div class="editor-title">Редактируйте код задачи 1:</div>
+                <button class="reset-btn" onclick="resetCode(1)">Сбросить код</button>
+            </div>
+            <textarea class="code-input" id="code1" spellcheck="false">
+const person2 = {}
+const person = {
+	name: "ОлегWeb",
+	age: "22, а по паспорту 38",
+	aboutMe: {
+		bad: "Вредых привычек нет",
+		good: "Не пью и не курю",
+	},
+	sayHi() {
+		console.log("Привет, это метод...мы его нашли.")
+	}
+}
+
+console.log(`Имя 〠: ${person.name}`);
+console.log(`Мне еще: ${person.age} лет ☀`);
+console.log(`Уважаемый работодатель - прикиньте ☺︎: ${person.aboutMe.bad}`);
+console.log(`Обо мне ✔: ${person.aboutMe.good}`);</textarea>
+        </div>
+        
+        <button class="run-btn" onclick="runTask(1)">Выполнить задачу 1</button>
+        
+        <div class="output-container" id="output1">
+            <div class="output-header">Результат выполнения:</div>
+            <div class="output-content" id="outputContent1"></div>
+        </div>
+        
+        <div class="success-message" id="success1">Проверьте пожалуйста</div>
+    </div>
+    
+    <div class="task-divider"></div>
+    
+    <!-- Задача 2 -->
+    <div class="task-container">
+        <div class="task-header">
+            <div class="task-number">Задача 2</div>
+            <h2 class="task-title">Функция isEmpty</h2>
+            <p class="task-description">Создайте функцию isEmpty, которая проверяет является ли переданный объект пустым. Если объект пуст - верните true, в противном случае false.</p>
+        </div>
+        
+        <div class="code-editor">
+            <div class="editor-header">
+                <div class="editor-title">Редактируйте код задачи 2:</div>
+                <button class="reset-btn" onclick="resetCode(2)">Сбросить код</button>
+            </div>
+            <textarea class="code-input" id="code2" spellcheck="false">
+function isEmpty (object) {
+	for (key in object) { 
+		return false; 
+	}	return true; 
+}
+
+console.log(isEmpty(person) + " ->> Найден объект ✔︎");
+console.log(isEmpty(person2) + " ->> Объект пуст ☐");</textarea>
+        </div>
+        
+        <button class="run-btn" onclick="runTask(2)">Выполнить задачу 2</button>
+        
+        <div class="output-container" id="output2">
+            <div class="output-header">Результат выполнения:</div>
+            <div class="output-content" id="outputContent2"></div>
+        </div>
+        
+        <div class="success-message" id="success2">Проверьте пожалуйста</div>
+    </div>
+    
+    <div class="task-divider"></div>
+    
+    <!-- Задача 3 -->
+    <div class="task-container">
+        <div class="task-header">
+            <div class="task-number">Задача 3</div>
+            <h2 class="task-title">Клонирование и модификация объекта</h2>
+            <p class="task-description">Создайте объект task с несколькими свойствами: title, description, isCompleted. Напишите функцию cloneAndModify(object, modifications), которая с помощью оператора spread создает копию объекта и применяет изменения из объекта modifications. Затем с помощью цикла for in выведите все свойства полученного объекта.</p>
+        </div>
+        
+        <div class="code-editor">
+            <div class="editor-header">
+                <div class="editor-title">Редактируйте код задачи 3:</div>
+                <button class="reset-btn" onclick="resetCode(3)">Сбросить код</button>
+            </div>
+            <textarea class="code-input" id="code3" spellcheck="false">
+const task = {
+	title: "Делаю домашку",
+	description: "Домашку делаю, чтобы понять JS и двигаться дальше",
+	isCompleted: false
+}
+ function cloneAndModify(object, modifications) {
+	const newObjest = {...object, ...modifications }
+	for (key in newObjest) {
+		console.log(newObjest[key]);	
+	}
+	}
+	cloneAndModify(task, {isCompleted: true});</textarea>
+        </div>
+        
+        <button class="run-btn" onclick="runTask(3)">Выполнить задачу 3</button>
+        
+        <div class="output-container" id="output3">
+            <div class="output-header">Результат выполнения:</div>
+            <div class="output-content" id="outputContent3"></div>
+        </div>
+        
+        <div class="success-message" id="success3">Проверьте пожалуйста</div>
+    </div>
+    
+    <div class="task-divider"></div>
+    
+    <!-- Задача 4 -->
+    <div class="task-container">
+        <div class="task-header">
+            <div class="task-number">Задача 4</div>
+            <h2 class="task-title">Вызов всех методов объекта</h2>
+            <p class="task-description">Создайте функцию callAllMethods, которая принимает объект и вызывает все его методы.</p>
+        </div>
+        
+        <div class="code-editor">
+            <div class="editor-header">
+                <div class="editor-title">Редактируйте код задачи 4:</div>
+                <button class="reset-btn" onclick="resetCode(4)">Сбросить код</button>
+            </div>
+            <textarea class="code-input" id="code4" spellcheck="false">
+
+function callAllMethods (object) { 
+	for (let key in object) {
+		if (typeof object[key] === "function") {
+			object[key]()
+		} else {
+		console.log(`Это свойство: ${key}`)}
+	}
+	}
+
+callAllMethods(person);
+
+</textarea>
+        </div>
+        
+        <button class="run-btn" onclick="runTask(4)">Выполнить задачу 4</button>
+        
+        <div class="output-container" id="output4">
+            <div class="output-header">Результат выполнения:</div>
+            <div class="output-content" id="outputContent4"></div>
+        </div>
+        
+        <div class="success-message" id="success4">✓ Задача выполнена успешно</div>
+    </div>
+
+    <script>
+        // Сохраняем оригинальный console.log
+        const originalConsoleLog = console.log;
+        
+        // Исходные коды для сброса (точно твой код)
+        const originalCodes = {
+            1: `// Задача 1.
+// Создайте объект person с несколькими свойствами, содержащими информацию о вас. Затем выведите значения этих свойств в консоль.
+
+const person2 = {}
+const person = {
+	name: "ОлегWeb",
+	age: "22, а по паспорту 38",
+	aboutMe: {
+		bad: "Вредых привычек нет",
+		good: "Не пью и не курю",
+	},
+	sayHi() {
+		console.log("Привет, это метод...мы его нашли.")
+	}
+}
+
+console.log(\`Имя 〠: \${person.name}\`);
+console.log(\`Мне еще: \${person.age} лет ☀\`);
+console.log(\`Уважаемый работодатель - прикиньте ☺︎: \${person.aboutMe.bad}\`);
+console.log(\`Обо мне ✔: \${person.aboutMe.good}\`);`,
+            
+            2: `// Задача 2.
+// Создайте функцию isEmpty, которая проверяет является ли переданный объект пустым. Если объект пуст - верните true, в противном случае false.
+
+function isEmpty (object) {
+	for (key in object) { 
+		return false; 
+	}	return true; 
+}
+
+console.log(isEmpty(person) + " ->> Найден объект ✔︎");
+console.log(isEmpty(person2) + " ->> Объект пуст ☐");`,
+            
+            3: `// Задача 3.
+// Создайте объект task с несколькими свойствами: title, description, isCompleted.
+// Напишите функцию cloneAndModify(object, modifications), которая с помощью оператора spread создает копию объекта и применяет изменения из объекта modifications.
+// Затем с помощью цикла for in выведите все свойства полученного объекта.
+
+const task = {
+	title: "Делаю домашку",
+	description: "Домашку делаю, чтобы понять JS и двигаться дальше",
+	isCompleted: false
+}
+ function cloneAndModify(object, modifications) {
+	const newObjest = {...object, ...modifications }
+	for (key in newObjest) {
+		console.log(newObjest[key]);	
+	}
+	}
+	cloneAndModify(task, {isCompleted: true});`,
+            
+            4: `// Задача 4.
+// Создайте функцию callAllMethods, которая принимает объект и вызывает все его методы.
+
+function callAllMethods (object) { 
+	for (let key in object) {
+		if (typeof object[key] === "function") {
+			object[key]()
+		} else {
+		console.log(\`Это свойство: \${key}\`)}
+	}
+	}
+
+callAllMethods(person);
+
+// Пример использования:
+// const myObject = {
+//     method1() {
+//         console.log('Метод 1 вызван');
+//     },
+//     method2() {
+//         console.log('Метод 2 вызван');
+//     },
+//     property: 'Это не метод'
+// };
+// callAllMethods(myObject);`
+        };
+        
+        // Глобальные переменные
+        window.person2 = {};
+        window.person = {
+            name: "ОлегWeb",
+            age: "22, а по паспорту 38",
+            aboutMe: {
+                bad: "Вредых привычек нет",
+                good: "Не пью и не курю",
+            },
+            sayHi() {
+                console.log("Привет, это метод...мы его нашли.");
+            }
+        };
+        
+        window.task = {
+            title: "Делаю домашку",
+            description: "Домашку делаю, чтобы понять JS и двигаться дальше",
+            isCompleted: false
+        };
+        
+        window.isEmpty = function(object) {
+            for (key in object) { 
+                return false; 
+            }    
+            return true; 
+        };
+        
+        window.cloneAndModify = function(object, modifications) {
+            const newObjest = {...object, ...modifications };
+            for (key in newObjest) {
+                console.log(newObjest[key]);    
+            }
+        };
+        
+        window.callAllMethods = function(object) { 
+            for (let key in object) {
+                if (typeof object[key] === "function") {
+                    object[key]();
+                } else {
+                    console.log(`Это свойство: ${key}`);
+                }
+            }
+        };
+        
+        // Функция сброса кода
+        function resetCode(taskNum) {
+            const textarea = document.getElementById(`code${taskNum}`);
+            textarea.value = originalCodes[taskNum];
+            adjustTextareaHeight(textarea);
+            console.log(`Код задачи ${taskNum} сброшен`);
+        }
+        
+        // Функция выполнения задачи
+        function runTask(taskNum) {
+            const output = document.getElementById(`output${taskNum}`);
+            const content = document.getElementById(`outputContent${taskNum}`);
+            const success = document.getElementById(`success${taskNum}`);
+            const code = document.getElementById(`code${taskNum}`).value;
+            
+            // Очищаем предыдущий вывод
+            content.innerHTML = '';
+            output.style.display = 'block';
+            success.style.display = 'none';
+            
+            // Перехватываем console.log
+            let logs = [];
+            console.log = function(...args) {
+                const formatted = args.map(arg => {
+                    if (typeof arg === 'object' && arg !== null) {
+                        try {
+                            return JSON.stringify(arg, null, 2);
+                        } catch (e) {
+                            return String(arg);
+                        }
+                    }
+                    return String(arg);
+                }).join(' ');
+                
+                logs.push(formatted);
+                originalConsoleLog.apply(console, args);
+            };
+            
+            // Выполняем код
+            try {
+                // Для задач 2 и 4 нужны переменные из задачи 1
+                if (taskNum === 2 || taskNum === 4) {
+                    // Вставляем глобальные переменные перед выполнением кода
+                    const fullCode = `
+                        try {
+                            ${code}
+                        } catch(e) {
+                            console.log('Ошибка: ' + e.message);
+                        }
+                    `;
+                    eval(fullCode);
+                } else {
+                    eval(code);
+                }
+                
+								if (logs.length === 0) {
+                    content.textContent = 'Код выполнен, но вывод в консоль отсутствует';
+                } else {
+                    content.textContent = logs.join('\n');
+                }
+                
+                success.style.display = 'block';
+                
+            } catch (error) {
+                content.textContent = '❌ Ошибка выполнения:\n' + error.message;
+                content.style.color = 'rgba(255, 120, 120, 0.9)';
+            } finally {
+                // Восстанавливаем console.log
+                console.log = originalConsoleLog;
+            }
+        }
+        
+        // Функция подстройки высоты textarea
+        function adjustTextareaHeight(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = (textarea.scrollHeight) + 'px';
+        }
+        
+        // Автоматически подстраиваем высоту textarea
+        document.querySelectorAll('textarea.code-input').forEach(textarea => {
+            textarea.addEventListener('input', function() {
+                adjustTextareaHeight(this);
+            });
+            
+            // Инициализируем высоту при загрузке
+            setTimeout(() => {
+                adjustTextareaHeight(textarea);
+            }, 100);
+        });
+        
+        // Инициализация при загрузке
+        window.addEventListener('load', function() {
+            console.log('Домашнее задание загружено. Редактируйте код и нажимайте "Выполнить" для проверки.');
+            console.log('Переменные доступны между задачами: person, person2, task');
+            
+            // Подстраиваем высоту всех textarea
+            document.querySelectorAll('textarea.code-input').forEach(adjustTextareaHeight);
+        });
+    </script>
+</body>
+</html>
