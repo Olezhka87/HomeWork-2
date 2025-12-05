@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Полноэкранный Swiper Slider</title>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <!-- Fancybox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .fullscreen-slider {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 9999;
+        }
+        
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .swiper-slide {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+        
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Яркие стрелки с контрастными цветами */
+        .custom-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            pointer-events: none;
+        }
+        
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            pointer-events: all;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 3px solid #ff6b6b;
+            box-shadow: 
+                0 0 20px rgba(255, 107, 107, 0.5),
+                inset 0 0 15px rgba(255, 255, 255, 0.2);
+            z-index: 101;
+        }
+        
+        .nav-arrow:hover {
+            background: rgba(255, 107, 107, 0.9);
+            transform: translateY(-50%) scale(1.15);
+            border-color: #fff;
+            box-shadow: 
+                0 0 30px rgba(255, 107, 107, 0.8),
+                0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-arrow:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+        
+        .nav-arrow svg {
+            width: 32px;
+            height: 32px;
+            stroke: #ff6b6b;
+            stroke-width: 3;
+            fill: none;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+            transition: stroke 0.3s ease;
+        }
+        
+        .nav-arrow:hover svg {
+            stroke: white;
+        }
+        
+        .nav-arrow--prev {
+            left: 30px;
+        }
+        
+        .nav-arrow--next {
+            right: 30px;
+        }
+        
+        /* Точки пагинации сверху */
+        .custom-pagination {
+            position: fixed;
+            top: 30px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 15px 20px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .pagination-dot {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.2),
+                inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pagination-dot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(145deg, rgba(255, 107, 107, 0.3), rgba(255, 107, 107, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .pagination-dot:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 107, 107, 0.6);
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(255, 107, 107, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+        
+        .pagination-dot:hover::before {
+            opacity: 1;
+        }
+        
+        .pagination-dot.active {
+            background: linear-gradient(145deg, #fff, #f0f0f0);
+            color: #000;
+            border-color: #ff6b6b;
+            transform: scale(1.1);
+            box-shadow: 
+                0 0 25px rgba(255, 107, 107, 0.5),
+                0 6px 15px rgba(0, 0, 0, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+        
+        .pagination-dot .dot-number {
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pagination-dot.active .dot-number {
+            text-shadow: none;
+        }
+        
+        /* Индикатор прогресса внизу */
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 100;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #ffa726);
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+        
+        /* Информация о слайде */
+        .slide-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
+        }
+        
+        /* Кнопка закрытия полноэкранного режима */
+        .close-fullscreen {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 107, 107, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 101;
+            border: 2px solid white;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .close-fullscreen:hover {
+            background: #ff5252;
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.8);
+        }
+        
+        /* Анимация появления */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fullscreen-slider {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-arrow {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .nav-arrow svg {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .nav-arrow--prev {
+                left: 15px;
+            }
+            
+            .nav-arrow--next {
+                right: 15px;
+            }
+            
+            .pagination-dot {
+                width: 42px;
+                height: 42px;
+                font-size: 14px;
+            }
+            
+            .custom-pagination {
+                top: 20px;
+                gap: 8px;
+                padding: 12px 15px;
+            }
+            
+            .slide-info {
+                font-size: 16px;
+                bottom: 15px;
+                right: 15px;
+                padding: 8px 16px;
+            }
+            
+            .close-fullscreen {
+                top: 20px;
+                right: 20px;
+                width: 44px;
+                height: 44px;
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-arrow {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .nav-arrow svg {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .pagination-dot {
+                width: 38px;
+                height: 38px;
+                font-size: 13px;
+            }
+            
+            .custom-pagination {
+                gap: 6px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Кнопка для демонстрации (можно удалить в реальном проекте) -->
+    <div style="display: none;">
+        <button onclick="openFullscreenSlider()" style="position: fixed; top: 20px; left: 20px; padding: 10px 20px; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer; z-index: 9998;">
+            Открыть слайдер
+        </button>
+    </div>
+
+    <!-- Полноэкранный слайдер -->
+    <div class="fullscreen-slider" id="fullscreenSlider">
+        <!-- Кнопка закрытия -->
+        <div class="close-fullscreen" onclick="closeFullscreenSlider()">
+            ✕
+        </div>
+        
+        <!-- Swiper -->
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <!-- Слайды будут добавлены через JavaScript -->
+            </div>
+            
+            <!-- Кастомная навигация -->
+            <div class="custom-nav">
+                <div class="nav-arrow nav-arrow--prev">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </div>
+                <div class="nav-arrow nav-arrow--next">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Кастомные точки сверху -->
+            <div class="custom-pagination">
+                <!-- Точки будут добавлены через JavaScript -->
+            </div>
+            
+            <!-- Индикатор прогресса -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <!-- Информация о слайде -->
+            <div class="slide-info" id="slideInfo">
+                <span id="currentSlide">1</span> / <span id="totalSlides">13</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Fancybox JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    
+    <script>
+        // Глобальные переменные
+        let swiper;
+        const totalSlides = 13;
+        
+        // Функция инициализации слайдера
+        function initSlider() {
+            const swiperWrapper = document.querySelector('.swiper-wrapper');
+            const paginationContainer = document.querySelector('.custom-pagination');
+            const totalSlidesElement = document.getElementById('totalSlides');
+            
+            // Очищаем контейнеры
+            swiperWrapper.innerHTML = '';
+            paginationContainer.innerHTML = '';
+            
+            // Устанавливаем общее количество слайдов
+            totalSlidesElement.textContent = totalSlides;
+            
+            // Создаем слайды
+            for (let i = 1; i <= totalSlides; i++) {
+                // Создаем слайд
+                const slide = document.createElement('div');
+                slide.className = 'swiper-slide';
+                slide.innerHTML = `
+                    <a href="img/${i}.png" data-fancybox="gallery" data-caption="Изображение ${i}">
+                        <img src="img/${i}.png" alt="Изображение ${i}" loading="lazy">
+                    </a>
+                `;
+                swiperWrapper.appendChild(slide);
+                
+                // Создаем точку
+                const dot = document.createElement('div');
+                dot.className = 'pagination-dot';
+                if (i === 1) dot.classList.add('active');
+                dot.innerHTML = `<span class="dot-number">${i}</span>`;
+                dot.dataset.index = i - 1;
+                paginationContainer.appendChild(dot);
+            }
+            
+            // Инициализация Swiper
+            swiper = new Swiper('.swiper', {
+                // Параметры
+                loop: true,
+                speed: 600,
+                grabCursor: true,
+                
+                // Автопрокрутка
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                
+                // Эффекты
+                effect: 'slide',
+                fadeEffect: {
+                    crossFade: true
+                },
+                
+                // Скрытые стандартные элементы
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+            
+            // Инициализация Fancybox
+            Fancybox.bind("[data-fancybox]", {
+                Thumbs: false,
+                Toolbar: false,
+                Images: {
+                    zoom: true,
+                },
+                Carousel: {
+                    infinite: false,
+                },
+            });
+            
+            // Кастомные элементы управления
+            setupCustomControls();
+            
+            // Обновление UI при смене слайда
+            updateUI();
+        }
+        
+        // Настройка кастомных элементов управления
+        function setupCustomControls() {
+            const prevArrow = document.querySelector('.nav-arrow--prev');
+            const nextArrow = document.querySelector('.nav-arrow--next');
+            const paginationDots = document.querySelectorAll('.pagination-dot');
+            const progressFill = document.getElementById('progressFill');
+            
+            // Обработчики стрелок
+            prevArrow.addEventListener('click', () => {
+                swiper.slidePrev();
+                resetAutoplayProgress();
+            });
+            
+            nextArrow.addEventListener('click', () => {
+                swiper.slideNext();
+                resetAutoplayProgress();
+            });
+            
+            // Обработчики для точек
+            paginationDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const slideIndex = parseInt(dot.dataset.index);
+                    swiper.slideTo(slideIndex);
+                    resetAutoplayProgress();
+                });
+            });
+            
+            // Обновление прогресс-бара
+            let progressInterval;
+            function startProgressBar() {
+                clearInterval(progressInterval);
+                progressFill.style.width = '0%';
+                
+                const autoplayDelay = swiper.params.autoplay.delay;
+                const startTime = Date.now();
+                
+                progressInterval = setInterval(() => {
+                    const elapsed = Date.now() - startTime;
+                    const progress = (elapsed / autoplayDelay) * 100;
+                    
+                    if (progress <= 100) {
+                        progressFill.style.width = `${progress}%`;
+                    } else {
+                        clearInterval(progressInterval);
+                    }
+                }, 50);
+            }
+            
+            function resetAutoplayProgress() {
+                startProgressBar();
+            }
+            
+            // Запуск прогресс-бара
+            startProgressBar();
+            
+            // Обновление прогресса при смене слайда
+            swiper.on('slideChange', () => {
+                startProgressBar();
+            });
+            
+            // Пауза/продолжение при наведении
+            swiper.el.addEventListener('mouseenter', () => {
+                swiper.autoplay.stop();
+                clearInterval(progressInterval);
+            });
+            
+            swiper.el.addEventListener('mouseleave', () => {
+                swiper.autoplay.start();
+                startProgressBar();
+            });
+            
+            // Обновление UI при смене слайда
+            swiper.on('slideChange', updateUI);
+            swiper.on('realIndexChange', updateUI);
+        }
+        
+        // Обновление интерфейса
+        function updateUI() {
+            const activeIndex = swiper.realIndex;
+            const paginationDots = document.querySelectorAll('.pagination-dot');
+            const currentSlideElement = document.getElementById('currentSlide');
+            
+            // Обновление активной точки
+            paginationDots.forEach(dot => {
+                dot.classList.remove('active');
+                const dotIndex = parseInt(dot.dataset.index);
+                
+                if (dotIndex === activeIndex) {
+                    dot.classList.add('active');
+                }
+            });
+            
+            // Обновление номера слайда
+            currentSlideElement.textContent = activeIndex + 1;
+        }
+        
+        // Функции для управления полноэкранным режимом
+        function openFullscreenSlider() {
+            document.getElementById('fullscreenSlider').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Инициализация слайдера при первом открытии
+            if (!document.querySelector('.swiper-slide')) {
+                initSlider();
+            } else {
+                swiper.update();
+            }
+        }
+        
+        function closeFullscreenSlider() {
+            document.getElementById('fullscreenSlider').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            if (swiper) {
+                swiper.autoplay.stop();
+            }
+        }
+        
+        // Закрытие по ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeFullscreenSlider();
+            }
+        });
+        
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Автоматически открываем слайдер при загрузке
+            openFullscreenSlider();
+        });
+    </script>
+</body>
+</html>
