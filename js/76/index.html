@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тёмный ToDo - Базовый функционал</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<script defer src="main1.js"></script>
+    
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-tasks"></i> Тёмный ToDo</h1>
+            <p class="subtitle">Минималистичный задачник для отработки базового функционала</p>
+        </header>
+
+        <div class="instructions">
+            <h3><i class="fas fa-code"></i> Задание по JavaScript</h3>
+            <ol>
+                <li>Получи элементы через querySelector: <strong>.form</strong>, <strong>.input</strong>, <strong>.todos</strong></li>
+                <li>Создай функцию <strong>createTodoElement(text)</strong> для генерации HTML-разметки задачи</li>
+                <li>Создай функцию <strong>handleCreateTodo(todos, text)</strong>, которая использует createTodo и createTodoElement</li>
+                <li>Привяжи события к кнопкам (добавление, отметка выполнения, редактирование, удаление)</li>
+            </ol>
+        </div>
+
+        <div class="code-hint">
+            // Ваш JS код уже подключен<br>
+            // Используйте функции: createTodo(), completeTodoById(), deleteTodoById(), editTodoById()
+        </div>
+
+        <!-- Форма добавления задачи -->
+        <form class="form">
+            <div class="input-group">
+                <input type="text" class="input" placeholder="Введите новую задачу...">
+                <button type="button" class="btn">
+                    <i class="fas fa-plus"></i> Добавить
+                </button>
+            </div>
+        </form>
+
+        <!-- Список задач -->
+        <div class="todos">
+            <div class="todo-item">
+                <div class="todo-checkbox"></div>
+                <div class="todo-content">
+                    <div class="todo-text">Изучить JavaScript основы</div>
+                    <div class="todo-id">ID: 1</div>
+                </div>
+                <div class="todo-actions">
+                    <div class="todo-btn edit-btn" title="Редактировать">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <div class="todo-btn delete-btn" title="Удалить">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="todo-item">
+                <div class="todo-checkbox completed"></div>
+                <div class="todo-content">
+                    <div class="todo-text completed">Создать HTML макет</div>
+                    <div class="todo-id">ID: 2</div>
+                </div>
+                <div class="todo-actions">
+                    <div class="todo-btn edit-btn" title="Редактировать">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <div class="todo-btn delete-btn" title="Удалить">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Статистика -->
+        <div class="todo-stats">
+            <div class="stat">
+                <div class="stat-value">2</div>
+                <div class="stat-label">Всего задач</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">1</div>
+                <div class="stat-label">Выполнено</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">1</div>
+                <div class="stat-label">Активно</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Тёмная тема • Минимализм • Фокус на функционале • <span id="current-date"></span></p>
+        </footer>
+    </div>
+
+    <script>
+        // Только для демо - показ текущей даты
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('ru-RU');
+    </script>
+</body>
+</html>
