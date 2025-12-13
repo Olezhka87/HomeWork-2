@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тёмный ToDo - Базовый функционал</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<script defer src="main1.js"></script>
+    
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-tasks"></i> Тёмный ToDo</h1>
+            <p class="subtitle">Минималистичный задачник для отработки базового функционала</p>
+        </header>
+
+        
+        <!-- Форма добавления задачи -->
+        <form class="form">
+            <div class="input-group">
+                <input type="text" class="input" placeholder="Введите новую задачу...">
+                <button type="submit" class="btn">
+                    <i class="fas fa-plus"></i> Добавить
+                </button>
+            </div>
+        </form>
+
+        <!-- Список задач -->
+        <div class="todos">
+            
+            
+            
+        </div>
+
+        <footer>
+            <p>Тёмная тема • Минимализм • Фокус на функционале • <span id="current-date"></span></p>
+        </footer>
+    </div>
+
+    <script>
+        // Только для демо - показ текущей даты
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('ru-RU');
+    </script>
+</body>
+</html>
