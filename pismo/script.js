@@ -32,7 +32,7 @@ let i = 0;
 function write(){
   if(i < content.length){
     target.textContent += content[i++];
-    setTimeout(write, 60 + Math.random()*80);
+    setTimeout(write, 40 + Math.random()*60);
   } else {
     document.getElementById('stamp').style.opacity = 1;
     document.getElementById('stamp').style.transform = 'scale(1) rotate(0deg)';
