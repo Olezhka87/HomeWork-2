@@ -1,0 +1,43 @@
+body {
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Bad Script', cursive;
+  position:relative;
+	background-image: url(bg.png);
+	position: relative;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.snow { position:fixed; inset:0; pointer-events:none; }
+.snow span { position:absolute; top:-10px; width:4px; height:4px; background:white; border-radius:50%; opacity:0.8; animation:fall linear infinite; }
+@keyframes fall { to { transform: translateY(110vh); opacity:0; } }
+.notebook {
+  width:60vw; max-width:900px; height:85vh;
+  background:linear-gradient(to right, #ff6b6b 2px, transparent 2px) 60px 0 / 100% 100%, repeating-linear-gradient(to bottom,#b7d7ff 0,#b7d7ff 1px,transparent 1px,transparent 30px), repeating-linear-gradient(to right,#b7d7ff 0,#b7d7ff 1px,transparent 1px,transparent 30px);
+  background-color:#fffef9; box-shadow:0 30px 60px rgba(0,0,0,.6);
+  padding:40px 40px 120px 90px; box-sizing:border-box;
+  position:relative; font-size:22px; line-height:36px; overflow:hidden;
+}
+.text { white-space:pre-wrap; color:#1e3cff; }
+.cursor { display:inline-block; width:2px; height:26px; background:#1e3cff; animation:blink 1s infinite; }
+@keyframes blink { 50% { opacity:0; } }
+.stamp {
+  position:absolute; bottom:30px; right:40px;
+  width:160px; height:160px;
+  opacity:0; transform:scale(0.5) rotate(-30deg);
+  transition:opacity 2s ease, transform 2s ease;
+}
+.send-btn { position:absolute; bottom:30px; left:50%; transform:translateX(-50%); padding:12px 26px; font-size:24px; font-family:'Bad Script', cursive; border:2px solid #222; background:#fff; cursor:pointer; border-radius:6px; box-shadow:0 6px 0 #222; opacity:0; transition:opacity .5s ease; }
+.send-btn.show { opacity:1; }
+.plane { position:fixed; width:64px; bottom:45vh; left:50%; transform:translateX(-50%) scale(1); opacity:0; pointer-events:none; }
+.fly-path { animation:flyForward 4s ease-in forwards; }
+@keyframes flyForward { from { transform:translateX(-50%) translateY(0) scale(1); opacity:1; } to { transform:translateX(-50%) translateY(-50vh) scale(0.1); opacity:1; } }
+.message { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; font-size:48px; color:#fff; opacity:0; transition:opacity 1.2s ease; pointer-events:none; }
+.show-message { opacity:1; }
+.decoration { position:absolute; width:80px; }
+.klyaksa { position:absolute; width:60px; opacity:0.4; transform:rotate(-15deg); top:30%; left:83%; }
